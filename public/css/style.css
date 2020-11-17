@@ -1,0 +1,20 @@
+body{
+
+    height: auto;
+    padding: 2em;
+    text-align: center;
+    background: radial-gradient(#fff,#ffd6d6);
+    
+}
+
+.title{
+
+    font-family: 'Pacifico', cursive;
+}
+
+.slogan{
+
+    color: grey;
+    font-size: smaller;
+    margin-top: -0px;
+}
