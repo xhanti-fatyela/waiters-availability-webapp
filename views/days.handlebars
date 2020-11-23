@@ -1,0 +1,47 @@
+ <div class="home-page">
+      <h1 class="title">Scuter Café</h1>
+      <p class="slogan">Everything Food & Coffee</p> <br><br>
+
+  </div>
+  <div class="top">
+
+<h1 style="color: white;"> Weekly Schedule :</h1>  
+    <i style="color:green; font-size:25px; font-weight: bold;"> Perfect</i><br>
+    <i style="color:gold; font-size:25px; font-weight: bold;"> Not Enough</i><br>
+    <i style="color:red; font-size:25px; font-weight: bold;"> Over Booked</i>
+  </div>
+  <br>
+  <div class="weekdays">
+
+    <table>
+      <thead>
+        {{#each dayshift}}
+        <tr>
+          
+          <th class="{{color}}">{{this.days_booked}}</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        
+          <td>
+            <ul>
+          
+              <li class="waiters">{{this.waiter_name}}</li>
+          
+            </ul>
+          </td>
+        {{/each}}
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <div class="admin-div">
+    <button class="btn-admin" name="link"><a href="/reset">Reset Week</a></button>
+        <button class="btn-admin"><a href="/waiters">Waiters</a></button>
+
+        		<p class="msg">{{messages.reset}}<p>
+  </div>

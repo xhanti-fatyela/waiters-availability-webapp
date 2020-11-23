@@ -10,15 +10,27 @@
     </div> --}}
 
     <br>
+    {{#each name}}
+    <form action="/waiters/{{this.user}}" method="POST">
+      <h2 class="name" style="color: white;" <a href="/waiters/{{this.user}}"> Hello {{this.user}}</a></h2>
+      {{/each}}
+     <h3 style="color: white;">Select Days :</h3>
 
-     <h3>Select Day :</h3>
+      {{#each allDays}}
+           <input type="checkbox" name="day" class="check" value="{{this.days_booked}} {{this.state}}">
+      <span class="checkmark"></span>
+      <label for="all" class="label" > {{this.days_booked}}</label>
+          {{/each}}
 
-    <input type="checkbox" id="days" name="Sunday" value="day">Sunday
-    <input type="checkbox" id="days" name="Monday" value="day">Monday
-    <input type="checkbox" id="days" name="Tuesday" value="day">Tuesday
-    <input type="checkbox" id="days" name="Wednesday" value="day">Wednesday
-    <input type="checkbox" id="days" name="Thursday" value="day">Thursday
-    <input type="checkbox" id="days" name="Friday" value="day">Friday
-    <input type="checkbox" id="days" name="Saturday" value="day">Saturday
-
+          
 </div>
+
+<br>
+
+      <input class="submitBtn" type="submit" value="Update Schedule"> <br>
+    </form>
+    		<p class="msg">{{messages.msg}}<p>
+        <p class="error">{{messages.error}}<p>
+
+
+        <button class="index"><a href="/days">Admin</a></button>

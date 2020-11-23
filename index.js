@@ -4,22 +4,22 @@ const bodyParser = require('body-parser')
 const flash = require('express-flash');
 const session = require('express-session');
 
-// const Registrations = require("./registrations");
-// const routes = require("./regRootKeeper")
+const Waiters = require("./waitersFac");
+const WaiterRoutes = require("./routeKeeper")
 
 
 let app = express();
 
 const pg = require("pg");
 const Pool = pg.Pool;
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/registrations';
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/waiters_app';
 
 const pool = new Pool({
     connectionString
 });
 
-// const registrations = Registrations(pool);
-// const routeKeeper = routes(registrations);
+const waiters = Waiters(pool);
+const routes = WaiterRoutes(waiters);
 
 app.use(express.static('public'));
 
@@ -42,23 +42,12 @@ app.use(bodyParser.json())
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-app.get('/', function (req, res) {
-  
-    res.render('index');
-  
-  });
-
-  app.get('/', function (req, res) {
-  
-    res.render('index');
-  
-  });
-
-  app.post('/waiters/:username', function (req, res) {
-  
-    res.render('index');
-  
-  });
+app.get("/", routes.homepage);
+app.get("/waiters", routes.waitersInfo);
+app.post("/waiters/:username", routes.adding);
+app.get("/waiters/:username", routes.getInfo);
+app.get("/days", routes.admin);
+app.get("/reset", routes.reset);
 
 let PORT = process.env.PORT || 3555;
 
