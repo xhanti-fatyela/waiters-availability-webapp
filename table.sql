@@ -4,7 +4,7 @@ create table waiters_info(
 );
 create table weekdays(
     id serial not null primary key,
-     days_booked text
+     days_booked text not null
 );
 create table all_info(
     id serial not null primary key,

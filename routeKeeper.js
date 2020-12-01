@@ -33,7 +33,7 @@ module.exports = function WaiterRoutes(waiters) {
                 req.flash('msg', 'days successfully submitted')
             }
             await waiters.waiterInfo(user);
-            await waiters.daysEntered(user, days)
+
             await waiters.allWaiters()
             res.render("index", {
                 name: [{
@@ -76,10 +76,12 @@ module.exports = function WaiterRoutes(waiters) {
 
         let names = await waiters.dispalyNames();
         let dayshift = await waiters.selectedShifts()
-
+        let allDays = await waiters.displayDays();
+console.log(names);
         res.render("days", {
             shifts: names, 
-            dayshift
+            dayshift,
+            allDays
         })
 
     }

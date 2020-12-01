@@ -26,7 +26,7 @@ module.exports = function waitersApp(pool){
 
         const selectQuery = await pool.query('select id from waiters_info where (waiters_info)=($1)', [name])
         const nameId = selectQuery.rows[0].id
-        await pool.query('delete from all_info where names_id = $1', [nameId])
+        await pool.query('delete from all_info where days_id = $1', [nameId])
         for (let i = 0; i < day.length; i++) {
             const selectedDays = await pool.query('select id from weekdays where days_booked =($1)', [day[i]])
             const dayId = selectedDays.rows[0].id
@@ -38,12 +38,13 @@ module.exports = function waitersApp(pool){
 
     async function addAllInfo (userId , dayId){
 
-        let nameId = await getNameId(userId);
+         let nameId = await getNameId(userId);
 
         for (const day of dayId) {
             let dayID = await getWeekdays(day)
+        // console.log(day)
             
-            await pool.query('INSERT INTO all_info (names_id, days_id) VALUES ($1,$2) ', [nameId, dayID])
+            await pool.query('INSERT INTO all_info (names_id, days_id) VALUES ($1,$2) ', [nameId, dayID.id])
         }
 
     }
@@ -91,7 +92,8 @@ module.exports = function waitersApp(pool){
 
     async function getWeekdays(dayId) {
         let weekId = await pool.query('select id from weekdays where (days_booked)=($1)', [dayId])
-        return weekId.rows[0].id
+        console.log(weekId.rows[0].id)
+        return weekId.rows[0]
     }
     async function selectedShifts() {
         let getId = await pool.query('select waiter_name, days_booked from all_info join waiters_info on all_info.names_id  = waiters_info.id join weekdays on all_info.days_id = weekdays.id')

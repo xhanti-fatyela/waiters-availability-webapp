@@ -15,9 +15,12 @@
       <h2 class="name" style="color: white;" <a href="/waiters/{{this.user}}"> Hello {{this.user}}</a></h2>
       {{/each}}
      <h3 style="color: white;">Select Days :</h3>
-
+       <br>
+       <br>
+       <br>
+       <br>
       {{#each allDays}}
-           <input type="checkbox" name="day" class="check" value="{{this.days_booked}} {{this.state}}">
+           <input type="checkbox" name="day" class="check" value="{{this.days_booked}}" {{this.state}}>
       <span class="checkmark"></span>
       <label for="all" class="label" > {{this.days_booked}}</label>
           {{/each}}
